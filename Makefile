@@ -16,7 +16,7 @@ $(OUTPUT_DIR)/log-msg:
 
 commit: stage $(OUTPUT_DIR)/log-msg
 	git diff --exit-code
-	cd $(OUTPUT_DIR) && git commit -F log-msg && rm log-msg
+	cd $(OUTPUT_DIR) && git diff --quiet --exit-code --cached || git commit -F log-msg && rm log-msg
 
 push: commit
 	cd $(OUTPUT_DIR)/ && git push origin gh-pages
