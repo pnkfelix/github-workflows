@@ -28,7 +28,7 @@ push-pages: commit-pages
 push-master:
 	git push origin master
 
-push: push-master push-pages
+push: commit-pages push-master push-pages
 
 $(OUTPUT_DIR):
 	git show-ref --verify --quiet refs/heads/gh-pages || git branch gh-pages origin/gh-pages
