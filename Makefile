@@ -30,9 +30,9 @@ $(OUTPUT_DIR):
 	git clone --branch gh-pages --single-branch -- . $@/
 #	git clone -- . $@/
 	cd $@/ && git remote set-url origin $(ORIGIN)
-#	cd $@/ && git fetch origin
+	cd $@/ && git fetch origin
 #	cd $@/ && git branch -f -t gh-pages origin/gh-pages
-#	cd $@/ && git checkout gh-pages
+	cd $@/ && git checkout gh-pages
 
 clean:
 	rm -rf $(OUTPUT_DIR)/
