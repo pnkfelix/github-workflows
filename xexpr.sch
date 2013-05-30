@@ -1,3 +1,4 @@
+;; -*- mode: scheme; indent-tabs-mode: nil -*-
 
 (define (xexpr? x)
   (define (andmap p l)
@@ -47,7 +48,7 @@
 
 (define (write-xexpr x . args)
 
-  ;; (write x)
+  ;; (pretty-print x)
 
   (let ((port (if (null? args)
                   (current-output-port)
@@ -58,7 +59,9 @@
      ((valid-char-integer? x) (write-numeric-escape x port))
      (else
       (let* ((tag (car x))
-             (attrs+body (if (and (pair? (cadr x)) (pair? (car (cadr x))))
+             (attrs+body (if (and (pair? (cdr x))
+                                  (pair? (cadr x))
+                                  (pair? (car (cadr x))))
                              (cons (cadr x) (cddr x))
                              (cons #f       (cdr x))))
              (attrs (car attrs+body))
