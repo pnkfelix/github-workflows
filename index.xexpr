@@ -1,0 +1,18 @@
+;; -*- mode: scheme; indent-tabs-mode: nil -*-
+`(html
+  (head (title "Github workflows"))
+  (body "Hello World."
+    (table
+     ,@(let ((codes named-escape-codes
+                    ;; (take 50 named-escape-codes)
+                    ))
+         (map (lambda (entry)
+                (let ((code-string
+                       (if (symbol? (cadr entry))
+                           (symbol->string (cadr entry))
+                           (number->string (cadr entry)))))
+                  `(tr ;; (td ,code-string)
+                    (td ,(string-append "&" code-string ";"))
+                    (td ,(string (car entry)))
+                    (td ,(cadr entry)))))
+              codes)))))
