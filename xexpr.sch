@@ -59,11 +59,13 @@
      ((valid-char-integer? x) (write-numeric-escape x port))
      (else
       (let* ((tag (car x))
-             (attrs+body (if (and (pair? (cdr x))
-                                  (pair? (cadr x))
-                                  (pair? (car (cadr x))))
-                             (cons (cadr x) (cddr x))
-                             (cons #f       (cdr x))))
+             (attrs+body (cond ((and (pair? (cdr x))
+                                     (or (null? (cadr x))
+                                         (and (pair? (cadr x))
+                                              (pair? (car (cadr x))))))
+                                (cons (cadr x) (cddr x)))
+                               (else
+                                (cons #f       (cdr x)))))
              (attrs (car attrs+body))
              (body  (cdr attrs+body)))
         (write-char #\< port)
