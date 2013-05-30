@@ -22,7 +22,8 @@ push: commit
 	cd $(OUTPUT_DIR)/ && git push origin gh-pages
 
 $(OUTPUT_DIR):
-	git clone --branch gh-pages --single-branch . $@/
+	git branch -f -t gh-pqges origin/gh-pages
+	git clone --branch gh-pages --single-branch -- . $@/
 	cd $@/ && git remote set-url origin $(ORIGIN)
 
 clean:
