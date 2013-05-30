@@ -14,6 +14,7 @@ $(OUTPUT_DIR)/log-msg:
 	git log -1                       >> $(OUTPUT_DIR)/log-msg
 
 commit: stage $(OUTPUT_DIR)/log-msg
+	git diff --exit-code
 	cd $(OUTPUT_DIR) && git commit -F log-msg
 
 push: commit
