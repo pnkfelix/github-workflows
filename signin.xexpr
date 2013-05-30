@@ -1,0 +1,14 @@
+(let* ((variant (lambda (x) (string-append "CloningVariants/" x)))
+       (forking (lambda (x) (string-append "ForkingFromLarcenists/" x)))
+       (sign-in (lambda (x) (string-append "GithubSigninBeforeForking/" x)))
+       (variant-ro (variant "read-only-from-larcenists.png"))
+       (variant-rw (variant "readwrite-from-user-fork.png"))
+       (fork-step01-hit-fork (forking "step01-visit-larcenists-hit-fork.png"))
+       (fork-step02-sel-dest (forking "step02-select-destination-account-if-necessary.png"))
+       (fork-step03-patience (forking "step03-be-patient.png"))
+       (fork-step99-done     (forking "step99-done.png"))
+       (sign-in-step01       (sign-in "step01-click-sign-in.png")))
+  `(html
+    (head (title "How to sign in to Github"))
+    (body
+    (img ((src ,sign-in-step01))))))
