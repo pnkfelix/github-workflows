@@ -12,7 +12,7 @@ stage: $(HTML_FILES)
 
 .PHONY: $(OUTPUT_DIR)/log-msg
 $(OUTPUT_DIR)/log-msg:
-	git diff --exit-code || echo "\nCannot create $@ when master unclean" && false
+	git diff --exit-code || ( echo "\nCannot create $@ when master unclean" && false )
 	echo 'auto-generated from master' > $(OUTPUT_DIR)/log-msg
 	git log -1                       >> $(OUTPUT_DIR)/log-msg
 
