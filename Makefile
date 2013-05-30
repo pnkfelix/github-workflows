@@ -1,5 +1,7 @@
 default: stage
 
+.PHONY: stage commit push clean
+
 ORIGIN:=$(shell git config --get remote.origin.url)
 
 OUTPUT_DIR=output
