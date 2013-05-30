@@ -1,0 +1,17 @@
+% git clone git@github.com:larcenists/larceny.git larceny_read_only
+Cloning into 'larceny_read_only'...
+remote: Counting objects: 38569, done.
+remote: Compressing objects: 100% (9054/9054), done.
+remote: Total 38569 (delta 28945), reused 38569 (delta 28945)
+Receiving objects: 100% (38569/38569), 15.45 MiB | 394 KiB/s, done.
+Resolving deltas: 100% (28945/28945), done.
+% cd larceny_read_only/
+% ls
+COPYRIGHT			include
+README-COMMON-LARCENY.txt	lib
+README-FIRST.txt		scheme-script
+README.md			setup.sch
+compile-stale			src
+doc				startup.sch
+examples			test
+% 
