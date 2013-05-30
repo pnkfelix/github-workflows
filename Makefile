@@ -1,6 +1,6 @@
 default: stage
 
-.PHONY: stage commit push clean
+.PHONY: stage commit-pages push push-pages push-master clean
 
 ORIGIN:=$(shell git config --get remote.origin.url)
 
@@ -18,12 +18,17 @@ $(OUTPUT_DIR)/log-msg:
 	echo 'auto-generated from master' > $(OUTPUT_DIR)/log-msg
 	git log -1                       >> $(OUTPUT_DIR)/log-msg
 
-commit: stage $(OUTPUT_DIR)/log-msg
+commit-pages: stage $(OUTPUT_DIR)/log-msg
 	@$(ENSURE_MASTER_CLEAN)
 	cd $(OUTPUT_DIR) && git diff --quiet --exit-code --cached || git commit -F log-msg && rm log-msg
 
-push: commit
+push-pages: commit-pages
 	cd $(OUTPUT_DIR)/ && git push origin gh-pages
+
+push-master:
+	git push origin master
+
+push: push-master push-pages
 
 $(OUTPUT_DIR):
 	git show-ref --verify --quiet refs/heads/gh-pages || git branch gh-pages origin/gh-pages
