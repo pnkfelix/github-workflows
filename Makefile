@@ -17,7 +17,7 @@ $(OUTPUT_DIR)/log-msg:
 	git log -1                       >> $(OUTPUT_DIR)/log-msg
 
 commit: stage $(OUTPUT_DIR)/log-msg
-	git diff --exit-code || echo "\nCannot commit when master unclean" && false
+	git diff --exit-code || ( echo "\nCannot commit when master unclean" && false )
 	cd $(OUTPUT_DIR) && git diff --quiet --exit-code --cached || git commit -F log-msg && rm log-msg
 
 push: commit
