@@ -8,6 +8,7 @@ HTML_FILES=output/index.html output/forking.html output/signin.html output/escap
 
 stage: $(HTML_FILES)
 
+.PHONY: $(OUTPUT_DIR)/log-msg
 $(OUTPUT_DIR)/log-msg:
 	git diff --exit-code
 	echo 'auto-generated from master' > $(OUTPUT_DIR)/log-msg
