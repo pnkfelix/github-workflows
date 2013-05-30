@@ -2,11 +2,12 @@ default: stage
 
 .PHONY: stage commit-pages push push-pages push-master clean
 
+OUTPUT_DIR=output
+HTML_ROOTS=index forking signin escape-codes
+
 ORIGIN:=$(shell git config --get remote.origin.url)
 
-OUTPUT_DIR=output
-
-HTML_FILES=output/index.html output/forking.html output/signin.html output/escape-codes.html
+HTML_FILES=$(addprefix $(OUTPUT_DIR)/,$(addsuffix .html,$(HTML_ROOTS)))
 
 ENSURE_MASTER_CLEAN=git diff --exit-code || ( echo "\nCannot create $@ when master unclean" && false )
 
