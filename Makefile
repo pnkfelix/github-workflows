@@ -30,4 +30,4 @@ clean:
 
 $(OUTPUT_DIR)/%.html: %.xexpr output generate-page.sch
 	larceny -nobanner -- generate-page.sch $< $@
-	cd $(OUTPUT_DIR) && git add $@
+	cd $(OUTPUT_DIR) && git add $(shell basename $@)
