@@ -7,7 +7,7 @@ OUTPUT_DIR=output
 stage: output/index.html
 
 push: output/index.html
-	cd $(OUTPUT_DIR)/ && git push origin
+	cd $(OUTPUT_DIR)/ && git push origin gh-pages
 
 $(OUTPUT_DIR):
 	git clone --branch gh-pages --single-branch . $@/
