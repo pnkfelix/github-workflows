@@ -1,8 +1,13 @@
-default: output/index.html
+default: stage
 
 ORIGIN:=$(shell git config --get remote.origin.url)
 
 OUTPUT_DIR=output
+
+stage: output/index.html
+
+push: output/index.html
+	cd $(OUTPUT_DIR)/ && git push origin
 
 $(OUTPUT_DIR):
 	git clone --branch gh-pages --single-branch . $@/
