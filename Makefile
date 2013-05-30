@@ -12,25 +12,25 @@ stage: $(HTML_FILES)
 
 .PHONY: $(OUTPUT_DIR)/log-msg
 $(OUTPUT_DIR)/log-msg:
-	git diff --exit-code
+	git diff --exit-code || echo "\nCannot create $@ when master unclean" && false
 	echo 'auto-generated from master' > $(OUTPUT_DIR)/log-msg
 	git log -1                       >> $(OUTPUT_DIR)/log-msg
 
 commit: stage $(OUTPUT_DIR)/log-msg
-	git diff --exit-code
+	git diff --exit-code || echo "\nCannot commit when master unclean" && false
 	cd $(OUTPUT_DIR) && git diff --quiet --exit-code --cached || git commit -F log-msg && rm log-msg
 
 push: commit
 	cd $(OUTPUT_DIR)/ && git push origin gh-pages
 
 $(OUTPUT_DIR):
-# git branch -f gh-pqges origin/gh-pages
-# git clone --branch gh-pages --single-branch -- . $@/
-	git clone -- . $@/
+	git branch -f gh-pages origin/gh-pages
+	git clone --branch gh-pages --single-branch -- . $@/
+#	git clone -- . $@/
 	cd $@/ && git remote set-url origin $(ORIGIN)
-	cd $@/ && git fetch origin
-	cd $@/ && git branch -f -t gh-pages origin/gh-pages
-	cd $@/ && git checkout gh-pages
+#	cd $@/ && git fetch origin
+#	cd $@/ && git branch -f -t gh-pages origin/gh-pages
+#	cd $@/ && git checkout gh-pages
 
 clean:
 	rm -rf $(OUTPUT_DIR)/
